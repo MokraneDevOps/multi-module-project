@@ -34,7 +34,7 @@ pipeline {
         stage('Execute') {
             steps {
                 script {
-                    def jarPath = '/tmp/workspace/docker-slave-sanchez/main/target/main-1.0.0-SNAPSHOT-jar-with-dependencies.jar'
+                    def jarPath = '/tmp/workspace/Jenkins-docker_01/main/target/main-1.0.0-SNAPSHOT.jar'
                     sh "java -jar ${jarPath}"
                 }
             }
