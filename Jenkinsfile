@@ -1,9 +1,6 @@
-//#!/usr/bin/env groovy
-
 pipeline {
-
     agent {
-        label('jenkins-slave-docker-node')
+        label 'jenkins-slave-docker-node'
     }
     stages {
         stage('Compile') {
@@ -20,7 +17,7 @@ pipeline {
                 }
             }
         }
-        stage('package') {
+        stage('Package') {
             steps {
                 script {
                     sh "mvn package assembly:single"
@@ -32,7 +29,14 @@ pipeline {
                 script {
                     sh "mvn install"
                 }
-           }    
-        }  
+            }
+        }
+        stage('Execute') {
+            steps {
+                script {
+                    sh "java -jar /tmp/workspace/docker-slave-sanchez/main/target/main-1.0.0-SNAPSHOT-jar-with-dependencies.jar"
+                }
+            }
+        }
     }
 }
